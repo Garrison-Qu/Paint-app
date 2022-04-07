@@ -20,7 +20,7 @@ int square = 4;
 float size;
 float sliderX;
 float sliderY;
-PImage lineImg;
+PImage pic;
 
 void setup(){
   size(1200,750);
@@ -30,7 +30,7 @@ void setup(){
   area = 30;
   sliderX = 950;
   size = thickness;
-  lineImg = loadImage("Line image.png");
+
 }
 
 void draw(){
@@ -142,6 +142,7 @@ void mouseClicked(){
   
   if (10 <= mouseX && mouseX <= 90 && 680 <= mouseY && mouseY <= 740){
     selectOutput("Please name your drawing","SaveImage");
+  }
   
   if (20 <= mouseX && mouseX <= 80 && 20 <= mouseY && mouseY <= 80){
     currentColor = color(255);
@@ -195,7 +196,6 @@ void mouseClicked(){
   if (20 <= mouseX && mouseX <= 80 && 220 <= mouseY && mouseY <= 280){
     currentShape = square;
   }
-  }
 }
 
 void sliderX(){
@@ -205,6 +205,21 @@ void sliderX(){
   
   size = map(sliderX, 950, 1125, 5, 32);
   thickness = map(sliderX, 950, 1125, 5, 32);
-  
+}
 
+void saveImage(File f){
+  if (f != null){
+    PImage canvas = get(100,100,width-100,height-100);
+    canvas.save(f.getAbsolutePath());
+  }
+}
+
+void openImage(File f){
+  if (f != null){
+    int n = 0;
+    while (n < 100){
+      PImage pic = loadImage(f.getPath());
+      n = n + 1;
+    }
+  }
 }
